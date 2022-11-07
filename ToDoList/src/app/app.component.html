@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/83e001f1d3.js" crossorigin="anonymous"></script>
+    <title>To Do List</title>
+    <style>
+        font {font-family: Open serif; font-weight: 300;}
+    </style>
+</head>
+
+<body>
+    <h1>To Do List:</h1>
+<hr>
+<h2>Add a new task: <input [(ngModel)]="task"><button (click)="addTask(task)">Submit</button></h2>
+<h2>Search Task: <input [(ngModel)]="query"></h2>
+<h3 *ngFor="let t of toDoList; let i = index">
+    <div *ngIf="t.task.toLowerCase().includes(query) || t.task === ''">
+        <div *ngIf="t.completed">
+            <span [ngClass]="'column-one text-line'"><button [hidden]="t.completed" (click)="completeTask(t)">Complete</button>{{ i + 1 }}: {{t.task}}</span>  
+            <span [ngClass]="'column-two text-line'">{{t.completed}}<button (click)="removeTask(t, toDoList)">X</button>
+                <input [(ngModel)]="newTask"><button (click)="editTask(toDoList, t, newTask)">Submit</button></span>
+            <br>
+        </div>
+        <div *ngIf="!t.completed">
+            <span [ngClass]="'column-one'"><button [hidden]="t.completed" (click)="completeTask(t)">Complete</button>{{ i + 1 }}: {{t.task}}</span>  
+            <span [ngClass]="'column-two'">{{t.completed}}<button (click)="removeTask(t, toDoList)">X</button>
+                <input [(ngModel)]="newTask"><button (click)="editTask(toDoList, t, newTask)">Submit</button></span>
+            <br>
+        </div>
+    </div>
+</h3>
+<h4 *ngIf="congratulations(toDoList)">Congratulations!</h4>
+</body>
+</html>
+

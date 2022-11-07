@@ -1,0 +1,14 @@
+.column-one {
+    width: 50%;
+    float: left;
+    content: \b
+}
+
+.column-two {
+    width: 50%;
+    float: right;
+}
+
+.text-line {
+    text-decoration: line-through;
+}
